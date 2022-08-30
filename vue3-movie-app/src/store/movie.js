@@ -6,7 +6,9 @@ export default {
   namespaced: true,
   // data
   state: () => ({
-    movies: []
+    movies: [],
+    message: 'Search for the movie title!',
+    loading: false
   }),
   // computed
   getters: {},
@@ -25,6 +27,14 @@ export default {
   },
   actions: { // 비동기
     async searchMovies({state, commit}, payload) {
+      if (state.loading) return
+
+      // 검색 전 메세지 초기화
+      commit('updateState', {
+        message: '',
+        loading: true
+      })
+
       try {
         const res = await _fetchMovie({
           ...payload,
@@ -62,6 +72,10 @@ export default {
         commit('updateState', {
           movies: [],
           message
+        })
+      } finally {
+        commit('updateState', {
+          loading: false
         })
       }
     }
