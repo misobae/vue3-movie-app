@@ -105,6 +105,10 @@ export default {
   methods: {
     // 고해상도 이미지 출력
     requestDiffSizeImage(url, size = 700) {
+      if (!url || url === 'N/A') {
+        this.imageLoading = false;
+        return ''
+      }
       const src = url.replace('SX300', `SX${size}`);
       this.$loadImage(src)
         .then(() => {
