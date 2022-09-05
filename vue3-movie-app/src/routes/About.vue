@@ -12,20 +12,16 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
   computed: {
-    icon() {
-      return this.$store.state.about.icon
-    },
-    name() {
-      return this.$store.state.about.name
-    },
-    email() {
-      return this.$store.state.about.email
-    },
-    github() {
-      return this.$store.state.about.github
-    }
+    ...mapState('about', [
+      'icon',
+      'name',
+      'email',
+      'github'
+    ])
   }
 }
 </script>
