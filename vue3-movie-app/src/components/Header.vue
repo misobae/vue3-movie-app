@@ -15,6 +15,11 @@
         </RouterLink>
       </div>
     </div>
+    <div
+      class="user"
+      @click="toAbout">
+      {{ icon }}
+    </div>
   </header>
 </template>
 
@@ -44,22 +49,49 @@ export default {
       ]
     }
   },
+  computed: {
+    icon() {
+      return this.$store.state.about.icon
+    }
+  },
   methods: {
     isMatch(path) {
       if (!path) return false
       return path.test(this.$route.fullPath)
+    },
+    toAbout() {
+      this.$router.push('/about')
     }
   }
 }
 </script>
 <style lang="scss" scoped>
 header {
+  position: relative;
   height: 70px;
   padding: 0 40px;
   display: flex;
   align-items: center;
   .logo {
     margin-right: 40px;
+  }
+  .user {
+    font-size: 40px;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 40px;
+    margin: auto;
+    transition: .4s;
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+  @include media-breakpoint-down(sm) {
+    .nav {
+      display: none;
+    }
   }
 }
 </style>

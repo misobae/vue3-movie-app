@@ -1,7 +1,7 @@
 <template>
   <div class="about">
     <div class="icon">
-      😊
+      {{ icon }}
     </div>
     <div class="name">
       {{ name }}
@@ -14,6 +14,9 @@
 <script>
 export default {
   computed: {
+    icon() {
+      return this.$store.state.about.icon
+    },
     name() {
       return this.$store.state.about.name
     },
